@@ -26,9 +26,9 @@ app.get("/api/notes", (req, res) => {
 });
 //POST
 app.post("/api/notes", (req, res) => {
-  const newNotes = req.body;
+  const addedNotes = req.body;
 
-  readFromFile("./db/db.json", "utf8").then((data) => (res.json(JSON.parse(data)).data.push(newNotes).data[data.length - 1].id = data.length - 1));
+  readFromFile("./db/db.json", "utf8").then((data) => (res.json(JSON.parse(data)).data.push(addedNotes).data[data.length - 1].id = data.length - 1));
   writeToFile("./db/db.json").then((data) => res.json(JSON.stringify(data)));
 });
 app.listen(PORT, () => console.log(`Listen at http://localhost:${PORT}`));
