@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // GET Route for homepage
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./public/index.html")));
 //GET Route for notes
-app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "/public/notes.html")));
+app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/notes.html")));
 //GET api/notes - Read from the file
 app.get("/api/notes", (req, res) => {
   readFromFile("./db/db.json", "utf8").then((data) => res.json(JSON.parse(data)));
