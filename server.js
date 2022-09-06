@@ -30,7 +30,7 @@ app.get("/api/notes", (req, res) => {
 
 //POST
 
-app.post("/api/notes", (req, res) => {
+app.post("/api/notes", function (req, res) {
   const addedNotes = req.body;
   readFromFile("db").then(function (data) {
     data = JSON.parse(data);
