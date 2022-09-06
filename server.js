@@ -52,16 +52,18 @@ app.post("/api/notes", function (req, res) {
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./public/index.html")));
 //DELETE
-// app.delete("/api/notes/:id", function (req, res) {
-//   const noteId = req.params.id;
+app.delete("/api/notes/:id", function (req, res) {
+  const noteId = req.params.id;
 
-//   readFromFile("./db/db.json").then(function (data) {
-//     data = JSON.parse(data);
-//   data.splice(noteId, 1);
-//   for (let i = 0; i < data.length; i++) {
-//     data[i].id = i;
-//   };
-//   writeToFile("./db/db.json", JSON.stringify(data));
-// });
+  readFromFile("./db/db.json").then(function (data) {
+    data = JSON.parse(data);
+    data.splice(noteId, 1);
+    for (let i = 0; i < data.length; i++) {
+      data[i].id = i;
+    }
+    writeToFile("./db/db.json", JSON.stringify(data));
+  });
+});
+
 //App is listening for a connection to the port
 app.listen(PORT, () => console.log(`Listen at http://localhost:${PORT}`));
