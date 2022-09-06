@@ -17,7 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static("public"));
 
 // GET Route for homepage
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./public/index.html")));
+
+// app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
+
 //GET Route for notes
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/notes.html")));
 
@@ -53,6 +55,8 @@ app.post("/api/notes", function (req, res) {
 //     .then((data[data.length - 1].id = data.length - 1));
 //   writeToFile("./db/db.json", JSON.stringify(data));
 // });
+
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./public/index.html")));
 
 //App is listening for a connection to the port
 app.listen(PORT, () => console.log(`Listen at http://localhost:${PORT}`));
