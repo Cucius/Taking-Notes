@@ -25,29 +25,30 @@ app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/note
 
 //GET api/notes - Read from the file
 app.get("/api/notes", (req, res) => {
-  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
+  readFromFile("db").then((data) => res.json(JSON.parse(data)));
 });
-
-// app.post("/api/notes", function (req, res) {
-//   const addedNotes = req.body;
-//   readFromFile("./db/db.json").then(function (data) {
-//     data = JSON.parse(data);
-//     data.push(addedNotes);
-//     data[data.length - 1].id = data.length - 1;
-//     writeToFile("./db/db.json", JSON.stringify(data));
-//   });
-// });
 
 //POST
+
 app.post("/api/notes", (req, res) => {
   const addedNotes = req.body;
-
-  readFromFile("./db/db.json")
-    .then((data) => JSON.parse(data))
-    .push(addedNotes)
-    .then((data[data.length - 1].id = data.length - 1));
-  writeToFile("./db/db.json", JSON.stringify(data));
+  readFromFile("db").then(function (data) {
+    data = JSON.parse(data);
+    data.push(addedNotes);
+    data[data.length - 1].id = data.length - 1;
+    writeToFile("db", JSON.stringify(data));
+  });
 });
+
+// app.post("/api/notes", (req, res) => {
+//   const addedNotes = req.body;
+
+//   readFromFile("./db/db.json")
+//     .then((data) => JSON.parse(data))
+//     .push(addedNotes)
+//     .then((data[data.length - 1].id = data.length - 1));
+//   writeToFile("./db/db.json", JSON.stringify(data));
+// });
 
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "./public/index.html")));
 
