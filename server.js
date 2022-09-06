@@ -33,26 +33,26 @@ app.get("/api/notes", (req, res) => {
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
-// app.post("/api/notes", function (req, res) {
-//   const addedNotes = req.body;
-//   readFromFile("./db/db.json").then(function (data) {
-//     data = JSON.parse(data);
-//     data.push(addedNotes);
-//     data[data.length - 1].id = data.length - 1;
-//     writeToFile("./db/db.json", JSON.stringify(data));
-//   });
-// });
+app.post("/api/notes", function (req, res) {
+  const addedNotes = req.body;
+  readFromFile("./db/db.json").then(function (data) {
+    data = JSON.parse(data);
+    data.push(addedNotes);
+    data[data.length - 1].id = data.length - 1;
+    writeToFile("./db/db.json", JSON.stringify(data));
+  });
+});
 
 //POST
-app.post("/api/notes", (req, res) => {
-  const addedNotes = req.body;
+// app.post("/api/notes", (req, res) => {
+//   const addedNotes = req.body;
 
-  readFromFile("./db/db.json")
-    .then((data) => JSON.parse(data))
-    .then(data.push(addedNotes))
-    .then((data[data.length - 1].id = data.length - 1));
-  writeToFile("./db/db.json", JSON.stringify(data));
-});
+//   readFromFile("./db/db.json")
+//     .then((data) => JSON.parse(data))
+//     .then(data.push(addedNotes))
+//     .then((data[data.length - 1].id = data.length - 1));
+//   writeToFile("./db/db.json", JSON.stringify(data));
+// });
 
 //App is listening for a connection to the port
 app.listen(PORT, () => console.log(`Listen at http://localhost:${PORT}`));
