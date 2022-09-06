@@ -21,36 +21,36 @@ app.use(express.static(path.join(__dirname, "public")));
 //GET Route for notes
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/notes.html")));
 
-app.get("/api/notes", function (req, res) {
-  readFromFile("./db/db.json").then(function (data) {
-    data = JSON.parse(data);
-    return res.json(data);
-  });
-});
-
-// //GET api/notes - Read from the file
-// app.get("/api/notes", (req, res) => {
-//   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
+// app.get("/api/notes", function (req, res) {
+//   readFromFile("./db/db.json").then(function (data) {
+//     data = JSON.parse(data);
+//     return res.json(data);
+//   });
 // });
 
-app.post("/api/notes", function (req, res) {
-  const addedNotes = req.body;
-  readFromFile("./db/db.json").then(function (data) {
-    data = JSON.parse(data);
-    data.push(addedNotes);
-    data[data.length - 1].id = data.length - 1;
-    writeToFile("./db/db.json", JSON.stringify(data));
-  });
+//GET api/notes - Read from the file
+app.get("/api/notes", (req, res) => {
+  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
-// //POST
-// app.post("/api/notes", (req, res) => {
+// app.post("/api/notes", function (req, res) {
 //   const addedNotes = req.body;
-
-//   readFromFile("./db/db.json")
-//     .then((data) => res.json(JSON.parse(data)))
-//     .then(data.push(addedNotes))
-//     .then((data[data.length - 1].id = data.length - 1));
-//   writeToFile("./db/db.json").then((data) => res.json(JSON.stringify(data)));
+//   readFromFile("./db/db.json").then(function (data) {
+//     data = JSON.parse(data);
+//     data.push(addedNotes);
+//     data[data.length - 1].id = data.length - 1;
+//     writeToFile("./db/db.json", JSON.stringify(data));
+//   });
 // });
+
+//POST
+app.post("/api/notes", (req, res) => {
+  const addedNotes = req.body;
+
+  readFromFile("./db/db.json")
+    .then((data) => res.json(JSON.parse(data)))
+    .then(data.push(addedNotes))
+    .then((data[data.length - 1].id = data.length - 1));
+  writeToFile("./db/db.json").then((data) => res.json(JSON.stringify(data)));
+});
 app.listen(PORT, () => console.log(`Listen at http://localhost:${PORT}`));
