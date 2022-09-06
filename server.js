@@ -30,8 +30,8 @@ app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/note
 
 //GET api/notes - Read from the file
 app.get("/api/notes", (req, res) => {
-  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
-});
+  readFromFile("./db/db.json").then((data) => JSON.parse(data));
+  return res.json(data);
 
 // app.post("/api/notes", function (req, res) {
 //   const addedNotes = req.body;
